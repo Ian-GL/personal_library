@@ -1,0 +1,41 @@
+<h1 class="text-white text-5xl font-bold text-center mt-8">Your Library</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <%= live_modal @socket, PersonalLibraryWeb.BookLive.FormComponent,
+    id: @book.id,
+    title: @page_title,
+    action: @live_action,
+    book: @book,
+    return_to: Routes.book_index_path(@socket, :index) %>
+<% end %>
+
+<table class="mt-16 mx-auto">
+  <thead class="bg-red-300 border border-b-0 border-blue-300">
+    <tr>
+      <th class="px-20">Classification</th>
+      <th class="px-20">Title</th>
+      <th class="px-20">Author</th>
+      <th class="px-20">Isbn</th>
+    </tr>
+  </thead>
+  <tbody id="books" class="bg-white border-1 border-t-0 border-blue-500">
+    <%= for book <- @books do %>
+      <tr id="book-<%= book.id %>">
+        <td class="border border-t-0 border-blue-300 text-center">
+          <%= book.classification %>
+        </td>
+        <td class="border border-t-0 border-blue-300 text-center">
+          <%= book.title %>
+        </td>
+        <td class="border border-t-0 border-blue-300 text-center">
+          <%= book.author %>
+        </td>
+        <td class="border border-t-0 border-blue-300 text-center">
+          <%= book.isbn %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%=# live_patch "New Book", to: Routes.book_index_path(@socket, :new) %></span>

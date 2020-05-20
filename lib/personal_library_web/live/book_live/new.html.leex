@@ -1,0 +1,32 @@
+<h1 class="text-white text-5xl font-bold text-center mt-8"> Add a new book </h1>
+
+ <%= if @book_confirmation do %>
+  <%= live_modal @socket, PersonalLibraryWeb.BookLive.FormComponent,
+    id: @book_confirmation.id,
+    title: "New book",
+    action: :new,
+    book: @book_confirmation,
+    return_to: Routes.book_show_path(@socket, :show, @book_confirmation) %>
+  <%= #TODO: Change return path to the new action %>
+  <% end %>
+
+<div class="flex flex-col mt-16 text-center">
+  <%= f = form_for :lcc_search, "#",
+    id: "new-lcc-search-form",
+    phx_submit: "get_lcc",
+    class: "flex flex-col mx-auto"
+  %>
+
+    <%= label f, :isbn, class: "uppercase" %>
+    <%= text_input f,
+      :isbn,
+      class: "pl-2 h-8 rounded-lg mt-2",
+      placeholder: "ISBN"
+    %>
+
+    <%= submit "Get information",
+      phx_disable_with: "Searching...",
+      class: "mt-8 px-4 py-2 text-white text-xl bg-red-400 rounded-lg"
+    %>
+  </form>
+</div>

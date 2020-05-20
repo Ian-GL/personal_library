@@ -1,0 +1,37 @@
+<h1>Show Book</h1>
+
+<%= if @live_action in [:edit] do %>
+  <%= live_modal @socket, PersonalLibraryWeb.BookLive.FormComponent,
+    id: @book.id,
+    title: @page_title,
+    action: @live_action,
+    book: @book,
+    return_to: Routes.book_show_path(@socket, :show, @book) %>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @book.title %>
+  </li>
+
+  <li>
+    <strong>Author:</strong>
+    <%= @book.author %>
+  </li>
+
+  <li>
+    <strong>Classification:</strong>
+    <%= @book.classification %>
+  </li>
+
+  <li>
+    <strong>Isbn:</strong>
+    <%= @book.isbn %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.book_show_path(@socket, :edit, @book), class: "button" %></span>
+<span><%= live_redirect "Back", to: Routes.book_index_path(@socket, :index) %></span>
