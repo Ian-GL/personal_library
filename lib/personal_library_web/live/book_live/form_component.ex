@@ -1,6 +1,6 @@
 defmodule PersonalLibraryWeb.BookLive.FormComponent do
   use PersonalLibraryWeb, :live_component
-
+  alias Phoenix.PubSub
   alias PersonalLibrary.Library
 
   @impl true
@@ -43,6 +43,8 @@ defmodule PersonalLibraryWeb.BookLive.FormComponent do
   defp save_book(socket, :new, book_params) do
     case Library.create_book(book_params) do
       {:ok, _book} ->
+        PubSub.broadcast!(PersonalLibrary.PubSub, "library", :new_book)
+
         {:noreply,
          socket
          |> put_flash(:info, "Book created successfully")

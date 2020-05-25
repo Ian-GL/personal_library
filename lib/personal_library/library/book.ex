@@ -16,5 +16,6 @@ defmodule PersonalLibrary.Library.Book do
     book
     |> cast(attrs, [:title, :author, :classification, :isbn])
     |> validate_required([:title, :classification, :isbn])
+    |> unique_constraint(:isbn)
   end
 end

@@ -2,10 +2,12 @@ defmodule PersonalLibraryWeb.BookLive.Index do
   use PersonalLibraryWeb, :live_view
 
   alias PersonalLibrary.Library
-  alias PersonalLibrary.Library.Book
+  alias Phoenix.PubSub
 
   @impl true
   def mount(_params, _session, socket) do
+    PubSub.subscribe(PersonalLibrary.PubSub, "library")
+
     {:ok, assign(socket, :books, fetch_books())}
   end
 
@@ -34,10 +36,14 @@ defmodule PersonalLibraryWeb.BookLive.Index do
     {:noreply, assign(socket, :books, fetch_books())}
   end
 
+  @impl true
+  def handle_info(:new_book, socket) do
+    {:noreply, assign(socket, :books, fetch_books())}
+  end
+
   defp fetch_books do
     Library.list_books()
     |> order_books_by_lcc
-    # |> IO.inspect(label: "books")
   end
 
   defp order_books_by_lcc(books) do
@@ -71,6 +77,6 @@ defmodule PersonalLibraryWeb.BookLive.Index do
   end
 
   defp dissect_lcc(lcc) do
-    captures = Regex.named_captures(~r/(?<first>.+?(?=[0-9]))(?<second>.+(?=\.)).(?<third>.+)/, lcc)
+    Regex.named_captures(~r/(?<first>.+?(?=[0-9]))(?<second>.+(?=\.)).(?<third>.+)/, lcc)
   end
 end
