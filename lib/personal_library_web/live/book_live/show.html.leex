@@ -1,6 +1,5 @@
-<h1>Show Book</h1>
 
-<%= if @live_action in [:edit] do %>
+<%= if @live_action == :edit do %>
   <%= live_modal @socket, PersonalLibraryWeb.BookLive.FormComponent,
     id: @book.id,
     title: @page_title,
@@ -9,29 +8,36 @@
     return_to: Routes.book_show_path(@socket, :show, @book) %>
 <% end %>
 
-<ul>
+<ul class="text-center mt-8 pb-4 bg-red-300 max-w-lg mx-auto rounded-lg">
+  <h1 class="text-center p-2 text-2xl text-white bg-red-400 rounded-t-lg">Book Info</h1>
 
-  <li>
-    <strong>Title:</strong>
+  <li class="flex flex-col mt-4">
+    <strong>Title</strong>
     <%= @book.title %>
   </li>
 
-  <li>
-    <strong>Author:</strong>
+  <li class="flex flex-col mt-4">
+    <strong>Author</strong>
     <%= @book.author %>
   </li>
 
-  <li>
-    <strong>Classification:</strong>
+  <li class="flex flex-col mt-4">
+    <strong>Classification</strong>
     <%= @book.classification %>
   </li>
 
-  <li>
-    <strong>Isbn:</strong>
+  <li class="flex flex-col mt-4">
+    <strong>Isbn</strong>
     <%= @book.isbn %>
   </li>
-
 </ul>
 
-<span><%= live_patch "Edit", to: Routes.book_show_path(@socket, :edit, @book), class: "button" %></span>
-<span><%= live_redirect "Back", to: Routes.book_index_path(@socket, :index) %></span>
+<div class="mt-12 flex justify-around max-w-lg mx-auto">
+  <button class="text-white bg-red-400 rounded-lg text-xl p-2">
+    Back to collection
+  </button>
+  <button class="text-white bg-red-400 rounded-lg text-xl p-2">
+    Add more
+  </button>
+</div>
+

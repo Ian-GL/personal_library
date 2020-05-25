@@ -18,6 +18,12 @@ config :personal_library, PersonalLibraryWeb.Endpoint,
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
+  https: [
+    port: 443,
+    otp_app: :personal_library,
+    keyfile: "../../../../localhost-key.pem",
+    certfile: "../../../../localhost.pem"
+  ],
   watchers: [
     node: [
       "node_modules/webpack/bin/webpack.js",

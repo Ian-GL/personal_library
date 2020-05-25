@@ -35,3 +35,6 @@ npm-debug.log
 
 .elixir_ls/
 .formatter.exs
+
+localhost-key.pem
+localhost.pem

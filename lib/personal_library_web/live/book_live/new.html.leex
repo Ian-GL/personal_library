@@ -1,16 +1,24 @@
-<h1 class="text-white text-5xl font-bold text-center mt-8"> Add a new book </h1>
+<h1 class="text-white text-5xl font-bold text-center mt-8 mb-16"> Add a new book </h1>
 
- <%= if @book_confirmation do %>
+<%= if @book_confirmation do %>
   <%= live_modal @socket, PersonalLibraryWeb.BookLive.FormComponent,
     id: @book_confirmation.id,
     title: "New book",
     action: :new,
     book: @book_confirmation,
-    return_to: Routes.book_show_path(@socket, :show, @book_confirmation) %>
+    return_to: Routes.book_new_path(@socket, :index, []) %>
   <%= #TODO: Change return path to the new action %>
-  <% end %>
+<% end %>
 
-<div class="flex flex-col mt-16 text-center">
+<div id="scanner" class="h-64 w-64 mx-auto relative" hidden>
+  <%# <button
+    class="absolute z-30 bg-red-500 bottom-0"
+  >
+    Cancel
+  </button> %>
+</div>
+
+<div class="flex flex-col text-center">
   <%= f = form_for :lcc_search, "#",
     id: "new-lcc-search-form",
     phx_submit: "get_lcc",
@@ -21,12 +29,23 @@
     <%= text_input f,
       :isbn,
       class: "pl-2 h-8 rounded-lg mt-2",
-      placeholder: "ISBN"
+      placeholder: "ISBN",
+      id: "isbn-input"
     %>
+
+    <div class="text-white text-lg mt-2">or</div>
+
+    <button
+      type="button"
+      class="text-white bg-red-300 text-xl rounded-lg mt-2 p-1"
+      phx-hook="BarcodeDetection"
+    >
+      Scan
+    </button>
 
     <%= submit "Get information",
       phx_disable_with: "Searching...",
-      class: "mt-8 px-4 py-2 text-white text-xl bg-red-400 rounded-lg"
+      class: "mt-12 px-4 py-2 text-white text-xl bg-red-400 rounded-lg"
     %>
   </form>
 </div>

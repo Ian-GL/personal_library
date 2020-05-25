@@ -29,7 +29,6 @@ defmodule PersonalLibrary.LccApi do
       "0" ->
         process_single_work(lcc_response)
       "4" ->
-        IO.puts("===== RESPONSE CODE IS 4 =====")
         first_owi = lcc_response |> xpath(~x"//works/work/@owi"l)
 
         if(first_owi) do
@@ -52,7 +51,6 @@ defmodule PersonalLibrary.LccApi do
     end
   end
   def process_single_work(lcc_response) do
-    IO.puts(lcc_response)
     title = lcc_response |> xpath(~x"//work/@title"l) |> List.first |> to_string
     author = lcc_response |> xpath(~x"//author/text()") |> to_string
     lcc = xpath(lcc_response, ~x"//lcc/mostPopular/@nsfa"l) |> List.first()
