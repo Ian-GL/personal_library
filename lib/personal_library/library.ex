@@ -36,6 +36,13 @@ defmodule PersonalLibrary.Library do
 
   """
   def get_book!(id), do: Repo.get!(Book, id)
+  def get_last_book_id() do
+    Book
+    |> select([b], b.id)
+    |> order_by([b], desc: b.id)
+    |> limit(1)
+    |> Repo.one()
+  end
 
   @doc """
   Creates a book.

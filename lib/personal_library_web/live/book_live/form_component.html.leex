@@ -1,27 +1,29 @@
-<h2><%= @title %></h2>
+<div class="w-full text-center bg-red-200 pt-0 rounded-lg">
+  <h2 class="text-center p-2 text-2xl text-white bg-red-300 rounded-t-lg" ><%= @title %></h2>
 
-<%= f = form_for @changeset, "#",
-  id: "book-form",
-  phx_target: @myself,
-  phx_change: "validate",
-  phx_submit: "save",
-  class: "flex flex-col" %>
+  <%= f = form_for @changeset, "#",
+    id: "book-form",
+    phx_target: @myself,
+    phx_change: "validate",
+    phx_submit: "save",
+    class: "flex flex-col max-w-md mx-auto content-center" %>
 
-  <%= label f, :title %>
-  <%= text_input f, :title %>
-  <%= error_tag f, :title %>
+    <%= label f, :title, class: "mt-6" %>
+    <%= text_input f, :title, class: "pl-2 h-8 rounded-lg mt-2"%>
+    <%= error_tag f, :title %>
 
-  <%= label f, :author %>
-  <%= text_input f, :author %>
-  <%= error_tag f, :author %>
+    <%= label f, :author, class: "mt-6" %>
+    <%= text_input f, :author, class: "pl-2 h-8 rounded-lg mt-2" %>
+    <%= error_tag f, :author %>
 
-  <%= label f, :classification %>
-  <%= text_input f, :classification %>
-  <%= error_tag f, :classification %>
+    <%= label f, :classification, class: "mt-6" %>
+    <%= text_input f, :classification, class: "pl-2 h-8 rounded-lg mt-2" %>
+    <%= error_tag f, :classification %>
 
-  <%= label f, :isbn %>
-  <%= text_input f, :isbn %>
-  <%= error_tag f, :isbn %>
+    <%= label f, :isbn, class: "mt-6" %>
+    <%= text_input f, :isbn, class: "pl-2 h-8 rounded-lg mt-2" %>
+    <%= error_tag f, :isbn %>
 
-  <%= submit "Save", phx_disable_with: "Saving..." %>
-</form>
+    <%= submit "Save", phx_disable_with: "Saving...", class: "my-8 p-2 w-20 mx-auto bg-red-400 text-white text-xl rounded-lg" %>
+  </form>
+</div>

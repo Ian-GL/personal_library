@@ -41,7 +41,7 @@ defmodule PersonalLibraryWeb.Router do
       live_dashboard "/dashboard", metrics: PersonalLibraryWeb.Telemetry
 
       live "/books", BookLive.Index, :index
-      live "/books/new", BookLive.New
+      live "/books/new", BookLive.New, :index
       live "/books/:id/edit", BookLive.Index, :edit
 
       live "/books/:id", BookLive.Show, :show

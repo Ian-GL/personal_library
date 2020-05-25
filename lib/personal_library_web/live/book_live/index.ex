@@ -20,12 +20,6 @@ defmodule PersonalLibraryWeb.BookLive.Index do
     |> assign(:book, Library.get_book!(id))
   end
 
-  defp apply_action(socket, :new, _params) do
-    socket
-    |> assign(:page_title, "New Book")
-    |> assign(:book, %Book{})
-  end
-
   defp apply_action(socket, :index, _params) do
     socket
     |> assign(:page_title, "Listing Books")
