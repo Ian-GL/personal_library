@@ -6,12 +6,6 @@ defmodule PersonalLibraryWeb.BookLive.New do
 
   @impl true
   def mount(_params, _session, socket) do
-    # last_id = Library.get_last_book_id() || 0
-
-    # assigns = %{
-    #   book_confirmation: nil,
-    #   new_id: last_id + 1
-    # }
     {:ok, socket}
   end
 

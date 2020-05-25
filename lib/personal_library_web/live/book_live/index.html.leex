@@ -1,4 +1,4 @@
-<h1 class="text-white text-5xl font-bold text-center mt-8">Your Library</h1>
+<h1 class="text-white text-xl md:text-5xl font-bold text-center mt-4 md:mt-8">Your Library</h1>
 
 <%= if @live_action == :edit do %>
   <%= live_modal @socket, PersonalLibraryWeb.BookLive.FormComponent,
@@ -9,24 +9,24 @@
     return_to: Routes.book_index_path(@socket, :index) %>
 <% end %>
 
-<table class="mt-16 mx-auto">
+<table class="mt-8 md:mt-16 mx-auto">
   <thead class="bg-red-300 border border-b-0 border-blue-300">
     <tr>
-      <th class="px-10">Classification</th>
-      <th class="px-20">Title</th>
+      <th class="md:px-10 text-xs md:text-base">Classification</th>
+      <th class="md:px-20 text-xs md:text-base">Title</th>
       <th class="px-16 hidden lg:table-cell">Author</th>
       <th class="px-20 hidden lg:table-cell">Isbn</th>
-      <th class="px-6"></th>
-      <th class="px-6"></th>
+      <th class="md:px-6 text-xs md:text-base"></th>
+      <th class="md:px-6 text-xs md:text-base"></th>
     </tr>
   </thead>
   <tbody id="books" class="bg-white border-1 border-t-0 border-blue-500">
     <%= for book <- @books do %>
       <tr id="book-<%= book.id %>">
-        <td class="border border-t-0 border-blue-300 text-center">
+        <td class="border border-t-0 border-blue-300 text-center text-xs md:text-base">
           <%= book.classification %>
         </td>
-        <td class="border border-t-0 border-blue-300 text-center">
+        <td class="border border-t-0 border-blue-300 text-center text-xs md:text-base">
           <%= book.title %>
         </td>
         <td class="border border-t-0 border-blue-300 text-center hidden lg:table-cell">
